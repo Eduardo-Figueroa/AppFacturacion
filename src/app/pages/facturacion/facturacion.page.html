@@ -1,0 +1,145 @@
+<app-header [codigoProforma] = 'codigoProforma'></app-header>
+
+<ion-content>
+  
+  <ion-card class = "cliente">
+    <ion-grid [fixed]="true">
+      <ion-row class="ion-justify-content-between ion-align-items-center">
+        <ion-col size="12" size-md="8" size-xs="9" class="ion-text-start">
+          <ion-text>
+            Nombre: {{clienteSeleccionado.clientenombrecomercial || clienteSeleccionado.nombrecomercial || clienteSeleccionado.ClienteNombre}}
+          </ion-text>
+          <p>Cedula: {{clienteSeleccionado.cedula || clienteSeleccionado.Cedula }}</p>
+          <p>Correo: {{clienteSeleccionado.emailfactura || clienteSeleccionado.EmailFactura}}</p>
+            <!-- <p>Telefono: {{clienteSeleccionado.telefonos || clienteSeleccionado.Telefonos}}</p>    -->
+
+        </ion-col>
+    
+        <ion-col size="12" size-md="4" size-xs="3" class="ion-text-end">
+          <ion-button size="small" color="primary" (click)="abrirModalEditarCliente()">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </ion-button>
+    
+          <ion-button *ngIf="tienePermiso('313')" size="small" color="primary" (click)="abrirModalClientes()">
+            <ion-icon name="search-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-around">
+      <ion-col class="facturacion" size-lg="4" size-md="1" size-sm="3">
+        <ion-button  size="small" color ="primary" (click)="abrirModalDescuentos()" >
+          Descuento
+        </ion-button> 
+      </ion-col>
+      <ion-col class="facturacion" size-lg="4" size-md="1" size-sm="3" >
+        <ion-button size="small" color ="primary" (click)="abrirModalPagos()">
+          Pagos
+        </ion-button>
+      </ion-col>
+      <ion-col class="facturacion" size-lg="4" size-md="1" size-sm="3" >
+        <ion-button size="small" color ="primary" (click)="abrirModalOpciones()">
+          Opciones
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-between">
+      <ion-col size="12">
+        <button 
+          class="search-button" 
+          (click)="abrirModalProductos()"
+          expand="block">
+          <ion-icon name="search"></ion-icon> Buscar productos
+        </button>
+      </ion-col>
+     
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngFor="let productos of proformaProductos; let i = index" >
+    <ion-item-sliding>
+      <ion-item-options side="start">
+        <ion-item-option color="success">
+          <ion-icon (click)= "editarProducto(productos)" slot="icon-only" name="create-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+  
+      <ion-item>
+  
+
+          <ion-grid class = "grid">
+            <ion-row class="">
+              <ion-col  size-lg="3" size-md="3" size-sm="3" size-xs="12">
+                <p style="font-weight: bold;">{{productos.ArticuloCodigo}} - {{productos.Descripcion}}</p>
+              </ion-col>
+              
+        
+              <ion-col  size-lg="3" size-md="3" size-sm="3" size-xs="4">
+                  <p>Cant: {{productos.ArticuloCantidad || productos.cantidad}}</p>
+              </ion-col>
+              <ion-col  size-lg="3" size-md="3" size-sm="3" size-xs="3.5">
+                <p>Desc: {{productos.ArticuloDescuentoPorcentage}}%</p>
+              </ion-col>
+
+
+              <ion-col  size-lg="3" size-md="3" size-sm="3" size-xs="4.5">
+                <p>
+                  {{clienteSeleccionado.monedacodigo}} {{productos.ArticuloVentaTotal}}   
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+  
+      </ion-item>
+  
+      <ion-item-options  *ngIf="tienePermiso('059')" side="end">
+        <ion-item-option color="danger">
+          <ion-icon slot="icon-only" name="trash-outline" (click)="eliminarProducto(productos)"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+  
+    </ion-item-sliding>
+  </ion-card>
+
+  <ion-grid *ngIf="proformaTotales">
+    <ion-row class="hoja">
+
+ 
+      <!-- Columna para el contenido, alineada a la izquierda -->
+      <ion-col size="12" size-md="6" size-xs="5">
+        <p>Total {{proformaTotales.Total}}</p>
+        <p *ngIf="mostrar">Vuelto {{proformaTotales.Vuelto}}</p>
+        <p *ngIf="mostrar">Gravado: {{proformaTotales.TotalGravado}}</p>
+      </ion-col>
+        <ion-col size="12" size-md="3" size-xs="4" >
+          <p>Articulos: {{proformaProductos.length}}</p>
+          <p *ngIf="mostrar">Exen: {{proformaTotales.TotalExento}}</p>
+          <p *ngIf="mostrar">Exon: {{proformaTotales.TotalExonerado}}</p> 
+        </ion-col>
+        <ion-col size="12" size-md="2" size-xs="2" >
+         <p>Cant: {{cantidad}}</p> 
+         <p *ngIf="mostrar">Imp: {{proformaTotales.TotalIva}}</p>
+         <p *ngIf="mostrar">Desc: {{proformaTotales.TotalDescuento}}</p> 
+        </ion-col>
+        <ion-col size="12" size-md="1" size-xs="1" >
+         <p><ion-icon (click)="desglose()" id="flecha" name="arrow-up-outline" size="small"></ion-icon></p> 
+         </ion-col>
+  
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<app-footer [Proforma]="Proforma" [codigoProforma] ='codigoProforma' [cliente]="clienteSeleccionado"></app-footer>
+
+
+

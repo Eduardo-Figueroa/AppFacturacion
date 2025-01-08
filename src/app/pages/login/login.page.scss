@@ -1,0 +1,38 @@
+.inicio{
+    width: 100%;
+    height: 100%;
+    color:#ffffff;
+    background-image: linear-gradient(180.0deg, #FFFFFF -0.0975096622593672%, #4E62CF 43.778740630176934%, #0F2AB7 100.09750966225934%);
+}
+
+.logo{
+    display:block;
+    margin-top: 90px;
+}
+
+.formulario input[type="text"], 
+            input[type="password"], 
+            input[type="email"],
+            select
+{
+    border-radius: 11px;
+    border:none; 
+    margin-top: 12px;
+    color: black;
+    display:block;
+    height:20px;
+    width:200px;
+}
+
+.input{
+    margin: 23px 0px 0px -30px;
+}
+
+.entrar-boton{
+    color: #f84141;
+    background-color: #101018;
+}
+
+a{
+    color: var(--ion-color-secondary)
+}

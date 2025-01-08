@@ -1,0 +1,18 @@
+.header{
+    padding: 4% 2% 5% 2%;
+    font-family: Arial;
+    color: #ffffff;
+    background-image: linear-gradient(90deg, #4E73DF 0.001%, #224ABE 100%);
+    border-top-left-radius: 0.5vh;
+    border-top-right-radius: 0.5vh;
+    border-bottom-left-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+    box-shadow: 0vh 1vh 0.5vh rgb(54, 51, 51);
+    }
+
+    .header ion-title{
+      text-transform: uppercase;
+      font-size: 1.4vh;
+      margin-left: -2vh;
+      margin-bottom: 2vh;  
+    }

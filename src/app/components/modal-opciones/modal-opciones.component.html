@@ -1,0 +1,55 @@
+<ion-backdrop inert></ion-backdrop>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Opciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModalOpciones()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+   
+    <ion-row>
+      <ion-col *ngIf="tienePermiso('021')" size="6">
+        <ion-button expand="full" (click)="facturarACosto()">
+          Facturar a costo
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" (click)="ivaDiferente()">
+          Iva diferente
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button expand="full" (click) = "exonerarFactura()">
+          Exonerar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" (click)="refrescar()">
+          Refrescar
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button expand="full" color="danger" (click)="quitarExonerar()">
+          Quitar exoneracion
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" (click)="Alerta('Limpiar proforma', ' Estas seguro de limpiar la proforma?')" color="danger">
+          Limpiar proforma
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="Imprimir()" expand="full" color="warning">
+          Imprimir
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

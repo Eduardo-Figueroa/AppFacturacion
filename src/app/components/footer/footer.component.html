@@ -1,0 +1,20 @@
+<div class="footer" mode="md">
+  
+  <ion-tab-button slot="bottom" (click)="Inicio()">
+    <ion-icon name="home-outline"></ion-icon>
+  </ion-tab-button>
+  <ion-tab-button  slot="bottom" (click) = "Configuracion()">
+    <ion-icon name="settings-outline"></ion-icon>
+  </ion-tab-button>
+  <ion-tab-button *ngIf="mostrarProcesar" style="color: rgb(157, 236, 157);" (click) = "elegirProcesar()" slot="bottom">
+    <ion-icon name="send-outline"></ion-icon>
+  </ion-tab-button>
+  <ion-tab-button style="color: rgb(255 58 58);" (click) = "presentarAlertaSalida('Salir','Desea salir del sistema?')" slot="bottom">
+    <ion-icon name="log-out-outline"></ion-icon>
+  </ion-tab-button>
+
+</div>
+<div class="copy">
+  Invefacon &copy; 2024
+</div>
+

@@ -1,0 +1,47 @@
+<ion-backdrop inert></ion-backdrop>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Editar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button type="submit" (click)="confirmar()" [strong]="true">Confirmar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+ <ion-content class="ion-padding" *ngIf="productoEditado">
+  <form>
+    <ion-grid>
+    <ion-row class="ion-align-items-start">
+      <ion-col size-lg="4" size-md="4" size-sm="4" size-xs="12">
+        <p style="font-weight: bold;">{{productoEditado.Descripcion}} </p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4" size-sm="4" size-xs="7">
+        <ion-select aria-label="Bodega" placeholder="{{opcionBodega.bodegaDesc}}" name="bodega" [(ngModel)]="opcionBodega" okText="Aceptar" cancelText="Cancelar">
+          <ion-select-option *ngFor="let bodega of productoEditado.bodegas; let i = index" [value]="{bodega: bodega.Cod_Bodega, bodegaDesc: bodega.Descripcion, index: i }">
+            {{bodega.Cod_Bodega}} - {{bodega.Descripcion}} ({{bodega.Existencia}})
+          </ion-select-option>
+        </ion-select>
+    
+        <ion-select aria-label="Precio" placeholder="{{opcionPrecio}}" name="precio" [(ngModel)]="opcionPrecio" okText="Aceptar" cancelText="Cancelar">
+          <ion-select-option *ngFor="let precio of productoEditado.Precios; let i = index" [value]="{ precio: precio, index: i }">
+            Precio {{i+1}} - {{precio}}
+          </ion-select-option>
+        </ion-select>
+        
+        <p>{{Cliente.monedacodigo || Cliente.moneda}} {{opcionPrecio * cantidadEditada || opcionPrecio.precio*cantidadEditada || 0}}</p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4" size-sm="4" size-xs="5">
+        <ion-input [(ngModel)]="cantidadEditada" name="cantidad" label="Cantidad" labelPlacement="floating" type="number" pattern="[0-9]*"></ion-input>
+        <ion-input [(ngModel)]="descuentoEditado" name="descuento" label="Descuento" labelPlacement="floating" type="number" pattern="[0-9]*" min="1" max="100"></ion-input>
+
+      </ion-col>
+    </ion-row>
+    </ion-grid> 
+  
+
+  </form>
+</ion-content> 

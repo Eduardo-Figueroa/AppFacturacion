@@ -1,0 +1,93 @@
+.pagos{
+    position: absolute;
+    bottom: 0;
+}
+
+.facturacion {
+    text-align: center;
+  }
+
+  ion-col {
+     text-align: center;
+  }
+
+
+  .grid p{
+    padding: 0px 0px 0px 0px;
+    margin: auto;
+    font-size: 12px;
+  }
+
+  ion-text{
+    font-size: 13px;
+  }
+
+  .hoja{
+    background-color:rgb(98 101 119);
+    position: fixed;
+    font-size: 12px;
+    bottom: 80px;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    
+}
+
+.cliente{
+  background-color: #cedddd87;
+}
+
+.hoja p {
+  margin: 0px 0px 0px -45px;
+}
+
+.flecha{
+  display: inline-block;
+  transform: rotate(180deg);
+}
+
+
+.hoja-expandida {
+  padding: 20px; 
+  margin: 20px; 
+  border: 2px solid #000; 
+  background-color: #f9f9f9; 
+  height: auto; 
+}
+
+
+.search-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border: 1px solid #dcdcdc; 
+  border-radius: 4px; 
+  background-color: #fff; 
+  color: #525151; 
+  font-size: 16px; 
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  width: 100%; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.search-button:disabled {
+  background-color: #f0f0f0; 
+  color: #aaa; 
+  cursor: not-allowed;
+  border-color: #e0e0e0; 
+}
+
+.search-button ion-icon {
+  margin-right: 8px; 
+  font-size: 20px; 
+}
+
+.search-button:hover {
+  background-color: #e0e0e0;
+}
+
+

@@ -1,0 +1,18 @@
+<ion-backdrop inert></ion-backdrop>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fecha {{tipo}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-datetime
+  presentation="fecha"  
+  [(ngModel)]="fecha"
+  [locale]="'es'"
+></ion-datetime>
+
+</ion-content>

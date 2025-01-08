@@ -1,0 +1,7 @@
+{
+  "name": "Invefacon",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

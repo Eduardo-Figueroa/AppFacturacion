@@ -1,0 +1,79 @@
+<ion-content >
+      <div class="inicio">
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <div class="logo">
+              <ion-col size="12" size-sm="3">
+                <img src="../../../assets/photo1717776037.svg" width="200"/>
+              </ion-col>
+            </div>
+          </ion-row>    
+        </ion-grid>
+          
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+          <div class="texto">
+            <ion-col size="12" size-sm="3">
+              Inicio Sesion
+            </ion-col>
+          </div>
+        </ion-row> 
+      </ion-grid>
+          <div class="formulario">
+            <form #formulario="ngForm" (ngSubmit)="ingresar()">
+              <ion-grid>
+
+                <ion-row class="ion-justify-content-center">
+                  <div class = "input">
+                    <ion-col size="12" size-sm="3">
+                      <ion-label >Correo</ion-label>
+                      <input type="email" name="correo" (change)=obtenerEmpresas(usuario.correo) [(ngModel)]="usuario.correo"/>
+                    </ion-col>
+                  </div>
+                </ion-row>
+                  
+                <ion-row class="ion-justify-content-center">
+                  <div class = "input">
+                    <ion-col size="12" size-sm="3">
+                      <ion-label>Empresa</ion-label>
+                      <select name="Empresa" [(ngModel)]="usuario.empresa">
+                        <option *ngFor = "let empresa of empresa" [ngValue]="empresa.empresa">{{empresa.empresa}}</option>
+                      </select>
+                    </ion-col>
+                  </div>
+                </ion-row>
+                
+                <ion-row class="ion-justify-content-center">
+                  <div class = "input">
+                    <ion-col size="12" size-sm="3">
+                      <ion-label>Contraseña</ion-label>
+                        <input type="password" name="Contrasenia" [(ngModel)]="usuario.password" required/>
+                    </ion-col>
+                  </div>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center">
+                  <div class = "input">
+                    <ion-col size="12" size-sm="3">
+                      <ion-button color="primary" type="submit">Entrar </ion-button>
+                    </ion-col>
+                  </div>
+                </ion-row>
+
+              </ion-grid>
+            </form>
+          </div>
+          <div>
+            <ion-grid>
+              <ion-row class="ion-justify-content-center">
+                <div class = "input">
+                  <ion-col size="12" size-sm="3">
+                    <ion-label><a href="https://google.com">Recuperar Contraseña</a></ion-label>
+                  </ion-col>
+                </div>
+              </ion-row>
+            </ion-grid>
+          </div> 
+      </div>
+</ion-content>
+

@@ -1,0 +1,39 @@
+<ion-backdrop inert></ion-backdrop>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Cambio cliente</ion-title>
+        <ion-buttons slot="end"> 
+          <ion-button (click)="cerrarModalClientes()" >Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+     <ion-searchbar placeholder="Buscar cliente" animated (keyup) = "buscarCliente($event)"></ion-searchbar>
+
+      <ion-card *ngFor="let cliente of busquedaCliente">
+        <ion-grid class="facturacion">
+          <ion-row class="ion-justify-content-between">
+            <ion-col  size-lg="4" size-md="4" size-sm="4" size-xs="6">
+              <p style="font-weight: bold;">{{cliente.nombrecomercial}}</p>
+              <p style="font-weight: bold;">{{cliente.nombrejuridico}}</p>
+              <p>Codigo: {{cliente.codigo}}</p>
+            </ion-col>
+            
+            <ion-col  size-lg="4" size-md="4" size-sm="4" size-xs="6">
+                <ion-button color ="primary" size="small" (click)="cambiarCliente(cliente)">
+                  Cambiar
+                </ion-button>
+                
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">Cedula: {{cliente.cedula}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+      <ion-infinite-scroll (ionInfinite)="cargarScroll($event)">
+        <ion-infinite-scroll-content loadingText="Cargando..."></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      
+    </ion-content>

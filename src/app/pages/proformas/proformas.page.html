@@ -1,0 +1,175 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size-lg="6" size-md="6" size-sm="6" size-xs="6">
+        <ion-item style ="padding: 0px;">
+          <p>Desde:</p>
+          <ion-button
+            (click)="abrirFechas('inicial')"
+            expand="block"
+            fill="clear"
+            shape="round"
+          >
+            <ion-input
+              [value]="fechaInicial ? (fechaInicial | date: 'dd-MM-yyyy') : ''"
+              readonly
+              placeholder="Inicial"
+            >
+            </ion-input>
+          </ion-button>
+        </ion-item>
+      </ion-col>
+      <ion-col size-lg="6" size-md="6" size-sm="6" size-xs="6">
+        <ion-item>
+          <p>Hasta:</p>
+          <ion-button
+            (click)="abrirFechas('final')"
+            expand="block"
+            fill="clear"
+            shape="round"
+          >
+            <ion-input
+              [value]="fechaFinal ? (fechaFinal | date: 'dd-MM-yyyy') : ''"
+              readonly
+              placeholder="Final"
+            >
+            </ion-input>
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-input
+            [(ngModel)]="cliente"
+            labelPlacement="floating"
+            label="Cliente"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-input
+            [(ngModel)]="clienteCodigo"
+            labelPlacement="floating"
+            label="Codigo Cliente"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-input
+            [(ngModel)]="usuarioCodigo"
+            labelPlacement="floating"
+            label="Codigo Usuario"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-select
+            [(ngModel)]="tipo"
+            okText="Aceptar"
+            cancelText="Cancelar"
+            label="Tipo"
+            label-placement="floating"
+          >
+            <ion-select-option value="1">Borrador</ion-select-option>
+            <ion-select-option value="2">Guardadas</ion-select-option>
+            <ion-select-option value="3">Facturadas</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-input
+            [(ngModel)]="monto"
+            labelPlacement="floating"
+            label="Monto"
+            type="number"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-input
+            [(ngModel)]="Agente"
+            labelPlacement="floating"
+            label="Codigo Agente"
+            type="number"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col
+        size-lg="6"
+        size-md="6"
+        size-sm="6"
+        size-xs="4"
+        class="ion-text-center"
+      >
+        <ion-button (click)="nuevaProforma()" size="small">Nueva</ion-button>
+      </ion-col>
+      <ion-col
+        size-lg="6"
+        size-md="6"
+        size-sm="6"
+        size-xs="4"
+        class="ion-text-center"
+      >
+        <ion-button (click)="Limpiar()" size="small">Limpiar</ion-button>
+      </ion-col>
+      <ion-col
+        size-lg="6"
+        size-md="6"
+        size-sm="6"
+        size-xs="4"
+        class="ion-text-center"
+      >
+        <ion-button (click)="cargarProformas()" size="small"
+          >Filtrar</ion-button
+        >
+      </ion-col>
+
+      <ion-col size="12" class="ion-text-left">
+        <p>Numero de registros: {{numeroRegistros}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngFor="let proforma of proformas; let i = index">
+    <ion-grid>
+      <ion-row class="ion-justify-content-between">
+        <ion-col size-lg="4" size-md="4" size-sm="4" size-xs="7">
+          <p style="font-weight: bold">{{proforma.ClienteNombre}}</p>
+          <p>{{proforma.Numero}}</p>
+          <p>Total CRC {{proforma.Total}}</p>
+        </ion-col>
+
+        <ion-col
+          size-lg="4"
+          size-md="4"
+          size-sm="4"
+          size-xs="4"
+          class="ion-text-right"
+        >
+          <p>{{proforma.Fecha.split(' ')[0]}}</p>
+          <ion-button
+            *ngIf="tienePermiso('080')"
+            size="small"
+            (click)="verProforma(i, proforma.Numero)"
+            shape="round"
+          >
+            <ion-icon name="eye-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>
+
+<app-footer></app-footer>

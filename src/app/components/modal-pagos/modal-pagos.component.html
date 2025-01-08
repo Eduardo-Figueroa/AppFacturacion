@@ -1,0 +1,67 @@
+<ion-backdrop inert></ion-backdrop>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Metodo de Pago</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModalPagos()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <p>Total a pagar: {{total}} CRC</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click) = "agregarCampos()">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid>
+    <ion-row *ngFor = "let metodo of metodoPago; let i = index">
+
+      <ion-col size-lg="3" size-md="3" size-sm="3" size-xs="3">
+        <ion-select [(ngModel)]="metodoPago[i].metodoSeleccionado" okText="Aceptar" cancelText="Cancelar">
+          <ion-select-option *ngFor="let metodo of metodos" [value]=" metodo.codigo">{{ metodo.Nombre }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+      
+      <ion-col size-lg="3" size-md="3" size-sm="3" size-xs="2.5">
+        <ion-select [(ngModel)]="metodoPago[i].monedaSeleccionada" (ionChange)="monto()" okText="Aceptar" cancelText="Cancelar">
+          <ion-select-option *ngFor="let moneda of monedas" [value]="moneda.codigo">{{ moneda.codigo }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+        <ion-col size-lg="3" size-md="3" size-sm="3" size-xs="4.5">
+          <ion-input type="number" [(ngModel)]="metodoPago[i].monto" (ionInput)="monto()"color="primary" placeholder="Ej: 10"></ion-input>
+        </ion-col>
+        <ion-col size-lg="3" size-md="3" size-sm="3" size-xs="1">
+          <ion-button color="danger" (click)="eliminarMetodo(i, metodo.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+    </ion-row>
+  </ion-grid> 
+
+    <ion-grid class="pagos">
+      <ion-row>
+        <ion-col>
+          <p>Pagado: CRC {{pago}}</p>
+        </ion-col>
+        <ion-col >
+          <p>Vuelto: CRC {{vuelto}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="guardarMetodos()">Guardar</ion-button>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+
+</ion-content>

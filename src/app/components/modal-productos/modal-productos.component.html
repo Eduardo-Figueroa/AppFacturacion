@@ -1,0 +1,56 @@
+<ion-backdrop inert></ion-backdrop>
+ <ion-header>
+  <ion-toolbar>
+    <ion-title>Buscar productos</ion-title>
+    <ion-buttons slot="end"> 
+      <ion-button (click)="cerrarModalProductos()" >Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <ion-searchbar placeholder="Buscar producto" (keyup) = "buscarProducto($event)"></ion-searchbar>
+ 
+
+      <ion-card *ngFor="let producto of busquedaProducto;  let i = index">
+        <form  (ngSubmit)="agregarProductos(producto, producto.cantidad, opcionPrecio, opcionBodega, producto.descuento)">
+          <ion-grid>
+            <ion-row class="ion-align-items-start">
+              <ion-col size-lg="4" size-md="4" size-sm="4" size-xs="12">
+                <p style="font-weight: bold;">{{producto.Codigo}} - {{producto.Descripcion || producto.producto.Descripcion}}</p>
+              </ion-col>
+              <ion-col size-lg="4" size-md="4" size-sm="4" size-xs="7">
+                <ion-select aria-label="Bodega" placeholder="{{producto.bodegas[0].Descripcion}}" [(ngModel)]="opcionBodega" name="bodega" okText="Aceptar" cancelText="Cancelar">
+                  <ion-select-option *ngFor="let bodega of producto.bodegas; let i = index" [value]="{ bodega: bodega.Cod_Bodega, bodegaDesc: bodega.Descripcion, index: i }">
+                    {{bodega.Cod_Bodega}} - {{bodega.Descripcion}} ({{bodega.Existencia}})
+                  </ion-select-option>
+                </ion-select>
+                <ion-select (ionChange)="precio($event)" aria-label="Precio" placeholder="{{producto.Precio1}}" [(ngModel)]="opcionPrecio" name="precio" okText="Aceptar" cancelText="Cancelar">
+                  <ion-select-option *ngFor="let precio of producto.Precios; let i = index" [value]="{ precio: precio, index: i }">
+                    Precio {{i+1}} - {{precio}}
+                  </ion-select-option>
+                </ion-select>
+                <p>{{Cliente.monedacodigo || Cliente.moneda}}  {{precioSeleccionado.precio * producto.cantidad ? (precioSeleccionado.precio * producto.cantidad) - 
+                  ((precioSeleccionado.precio * producto.cantidad) * (producto.descuento / 100)) +
+                  (((precioSeleccionado.precio * producto.cantidad) - ((precioSeleccionado.precio * producto.cantidad) * (producto.descuento / 100))) * (13 / 100)) : producto.Precio1 * producto.cantidad ?  (producto.Precio1 * producto.cantidad) - 
+                  ((producto.Precio1 * producto.cantidad) * (producto.descuento / 100)) +
+                  (((producto.Precio1 * producto.cantidad) - ((producto.Precio1 * producto.cantidad) * (producto.descuento / 100))) * (13 / 100)) : '0'}}</p>
+              <!-- <p>{{Cliente.monedacodigo || Cliente.moneda}}  {{precioSeleccionado.precio * producto.cantidad ? (precioSeleccionado.precio * producto.cantidad)  - ((precioSeleccionado.precio* producto.cantidad)* producto.descuento/100) + ((precioSeleccionado.precio * producto.cantidad)*13/100) : producto.Precio1 * producto.cantidad ? (producto.Precio1 * producto.cantidad) - ((producto.Precio1* producto.cantidad)* producto.descuento/100)  + ((producto.Precio1* producto.cantidad)*13/100) : '0'}}</p> -->
+              </ion-col>
+              <ion-col size-lg="4" size-md="4" size-sm="4" size-xs="5">
+                <ion-input [(ngModel)]="producto.cantidad" name="cantidad" label="Cantidad" labelPlacement="floating" type="number"></ion-input>
+                <ion-input [(ngModel)]="producto.descuento" name="descuento" label="Descuento" labelPlacement="floating" type="number" min="0" max="100"></ion-input>
+                <ion-button type="submit" color="primary" size="small">
+                  Agregar
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-card>
+
+      <ion-infinite-scroll (ionInfinite)="cargarScroll($event)">
+        <ion-infinite-scroll-content loadingText="Cargando..."></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+  </ion-content> 
+
